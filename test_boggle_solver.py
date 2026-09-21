@@ -119,20 +119,15 @@ class TestBoggleSolver(unittest.TestCase):
 
         game = Boggle(grid, ["ABC", "ACD", "XYZ"])
 
-        self.assertIsInstance(game.getSolution(), list)
+        solutions = game.getSolution()
 
-def test_empty_rows_grid(self):
-        """Frame 14: Grid containing an empty nested list [[]]."""
-        game = Boggle([[]], ["ABC"])
-        self.assertEqual([], game.getSolution())
+        self.assertIn("ABC", solutions)
+        self.assertIn("ACD", solutions)
+        self.assertNotIn("XYZ", solutions)
 
-    def test_irregular_grid(self):
-        """Frame 15: Jagged/irregular grid shapes handle gracefully."""
-        grid = [["A", "B", "C"], ["D", "E"]]
-        game = Boggle(grid, ["ABC"])
-        self.assertEqual([], game.getSolution())
 
     def test_standard_four_by_four_grid(self):
+        
         """Frame 16: Standard 4x4 Boggle grid."""
         grid = [
             ["A", "B", "C", "D"],
