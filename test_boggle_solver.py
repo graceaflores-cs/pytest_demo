@@ -76,6 +76,51 @@ class TestBoggleSolver(unittest.TestCase):
 
         self.assertIsInstance(game.getSolution(), list)
 
+    def test_two_by_two_grid(self):
+        game = Boggle([["A", "B"], ["C", "D"]], ["ABC"])
+        self.assertIsInstance(game.getSolution(), list)
+
+    def test_three_by_three_grid(self):
+        grid = [
+            ["A", "B", "C"],
+            ["D", "E", "F"],
+            ["G", "H", "I"]
+        ]
+
+        game = Boggle(grid, ["ABE"])
+
+        self.assertIsInstance(game.getSolution(), list)
+
+    def test_word_too_short(self):
+        grid = [
+            ["A", "B"],
+            ["C", "D"]
+        ]
+
+        game = Boggle(grid, ["AB"])
+
+        self.assertNotIn("AB", game.getSolution())
+
+    def test_no_matching_words(self):
+        grid = [
+            ["A", "B"],
+            ["C", "D"]
+        ]
+
+        game = Boggle(grid, ["XYZ", "QRS"])
+
+        self.assertEqual([], game.getSolution())
+
+    def test_multiple_dictionary_words(self):
+        grid = [
+            ["A", "B"],
+            ["C", "D"]
+        ]
+
+        game = Boggle(grid, ["ABC", "ACD", "XYZ"])
+
+        self.assertIsInstance(game.getSolution(), list)
+
 
 if __name__ == "__main__":
     unittest.main()
